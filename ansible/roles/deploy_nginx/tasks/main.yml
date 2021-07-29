@@ -1,0 +1,29 @@
+---
+# tasks file for deploy_nginx
+- name: install nginx and ensure package cache is up to date when UBUNTU
+  apt:
+    name: nginx=1.18.*
+    update_cache: yes
+    cache_valid_time: 3600
+  when:
+    ansible_os_family == "Debian"  
+  notify:
+    - start and enable nginx
+
+- name: install nginx and ensure package cache is up to date when CENTOS
+  yum:
+    name: nginx=1.18.*
+    update_cache: yes
+  when:
+    ansible_os_family == "RedHat"  
+  notify:
+    - start and enable nginx
+
+- name: add template files
+  template:
+    src: "nginx.j2"
+    dest: "/var/www/html/index.nginx-debian.html"
+    force: yes
+    backup: yes
+  notify:
+    - reload nginx

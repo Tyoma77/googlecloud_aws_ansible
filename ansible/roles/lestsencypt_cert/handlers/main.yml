@@ -1,0 +1,7 @@
+---
+# handlers file for lestsencypt_cert
+
+- name: reload nginx
+  service:
+    name: nginx
+    state: reloaded

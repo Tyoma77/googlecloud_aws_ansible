@@ -1,0 +1,20 @@
+- name: Install epel repository
+  yum:
+    name: epel-release
+
+- name: Install certbot with Centos
+  dnf:
+    enablerepo: epel
+    name: ['certbot', 'python3-certbot-nginx']
+    update_cache: yes
+
+- name: run certbot to get certificate
+  command: "{{ certbot_command_centos }}"
+
+- name: change virtualhost whith ssl cert
+  template:
+    src: "newvirtualhost.j2"
+    dest: "/etc/nginx/conf.d/mainhost.conf"
+    force: yes
+  notify:
+    - reload nginx

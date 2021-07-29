@@ -1,0 +1,10 @@
+- name: add template files
+  template:
+    src: "virtualhost.j2"
+    dest: "/etc/nginx/conf.d/mainhost.conf"
+    force: yes
+    backup: yes
+  notify:
+    - reload nginx
+
+

@@ -1,0 +1,12 @@
+---
+# tasks file for init_virtualhosts
+
+- name: add template files and enable virtualhost with ubuntu
+  include_tasks: virtualhost_ubuntu.yml
+  when:
+    ansible_os_family == "Debian" 
+
+- name: add template files and enable virtualhost with ubuntu
+  include_tasks: virtualhost_centos.yml
+  when:
+    ansible_os_family == "RedHat"

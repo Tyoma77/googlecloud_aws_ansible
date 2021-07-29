@@ -1,0 +1,21 @@
+#Ansible installed file
+
+server {
+    listen {{ ansible_default_ipv4.address }}:80;
+    server_name {{ server_name }}
+    return 301 https://$host$request_uri;
+}
+
+server {
+        listen 443 ssl;
+        server_name {{ server_name }};
+        {% if ansible_os_family == "RedHat"  %}
+        root /var/www/html;
+        {% elif ansible_os_family == "Debian"  %}
+        root /usr/share/nginx/html;
+        {% endif %}
+        index index.html index.nginx-debian.html;
+
+        ssl_certificate /etc/letsencrypt/live/{{ server_name }}/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/{{ server_name }}/privkey.pem;
+}

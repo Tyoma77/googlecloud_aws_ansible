@@ -1,0 +1,6 @@
+---
+# defaults file for init_virtualhosts
+
+avail_path: /etc/nginx/sites-available
+enabl_path: /etc/nginx/sites-enabled
+server_name: artem-vinogradov.devops.rebrain.srwx.net

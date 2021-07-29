@@ -1,0 +1,24 @@
+- name: Install certbot with Ubuntu
+  apt:
+    name: ['certbot', 'python3-certbot-nginx']
+    update_cache: yes
+    cache_valid_time: 432000
+
+- name: run certbot to get certificate
+  command: "{{ certbot_command_ubuntu }}"
+
+- name: change virtualhost whith ssl cert
+  template:
+    src: "newvirtualhost.j2"
+    dest: "{{ avail_path }}/mainhost"
+    force: yes
+  notify:
+    - reload nginx
+
+- name: enable virtualhost whith ssl cert
+  file:
+    src: "{{ avail_path }}/mainhost"
+    dest: "{{ enabl_path }}/mainhost"
+    state: link
+  notify:
+      - reload nginx

@@ -1,0 +1,21 @@
+---
+# tasks file for lestsencypt_cert
+
+- name: Install certbot with Centos
+  include_tasks: deploy_with_centos.yml
+  when:
+    ansible_os_family == "RedHat" 
+
+- name: install certbot and get certificate with Ubuntu
+  include_tasks: deploy_with_ubuntu.yml
+  when:
+    ansible_os_family == "Debian"
+
+- name: add a cron job for certbot
+  cron:
+    name: "certbot"
+    special_time: daily
+    state: absent
+    job: "{{ cron_job }}"
+    user: root
+
