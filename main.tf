@@ -172,3 +172,13 @@ resource "local_file" "ansible_inventory" {
   )}"
   filename = "${path.module}/ansible/inventory"
 }
+
+resource "null_resource" "ansible run" {
+    depends_on = [
+      local_file.ansible_inventory,
+  ]
+
+  provisioner "local-exec" {
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -u root -i ${path.module}/ansible/inventory ${path.module}/ansible/webserver.yml"
+  }
+}
