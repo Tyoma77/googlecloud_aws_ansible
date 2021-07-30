@@ -173,3 +173,9 @@ variable "url_map_name" {
     default     = "nginx-url-map"
     type        = string
 }
+
+variable "google_health_check_address" {
+    description = "Addresses of google health check servieces"
+    default     = ["130.211.0.0/22", "35.191.0.0/16"]
+    type        = list
+}

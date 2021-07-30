@@ -28,7 +28,7 @@ resource "google_compute_firewall" "allow_health_check" {
     ports    = ["80"]
   }
 
-  source_ranges = ["130.211.0.0/22", "35.191.0.0/16"]
+  source_ranges = var.google_health_check_address
   source_tags   = ["allow-health-check"]
 }
 
@@ -165,7 +165,7 @@ resource "aws_route53_record" "www" {
 }
 
 resource "local_file" "ansible_inventory" {
-  content = "${templatefile('${path.module}/ansible_inventory.tpl', {
+  content = "${templatefile("${path.module}/ansible_inventory.tpl", {
     name = var.machines
     ip_adr = local.google_cloud_ip_address
     }
@@ -173,7 +173,7 @@ resource "local_file" "ansible_inventory" {
   filename = "${path.module}/ansible/inventory"
 }
 
-resource "null_resource" "ansible run" {
+resource "null_resource" "ansible_run" {
     depends_on = [
       local_file.ansible_inventory,
   ]
