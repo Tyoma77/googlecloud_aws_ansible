@@ -1,7 +1,0 @@
----
-# handlers file for init_virtualhosts
-
-- name: reload nginx
-  service:
-    name: nginx
-    state: reloaded

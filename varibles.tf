@@ -1,53 +1,59 @@
 variable "aws_access_key" {
+    description = "AWS access key"
+    type        = string
 }
 
 variable "aws_secret_key" {
+    description = "AWS secret key"
+    type        = string
 }
 
 variable "project_name" {
-    default = "rebrain"
+    description = "Project name in google cloud"
+    default     = "rebrain"
+    type        = string
 }
 
 variable "google_region" {
     description = "Region of google cloud"
-    type = string
-    default = "us-central1"
+    type        = string
+    default     = "us-central1"
 }
 
 variable "google_zone" {
     description = "Zone of google cloud"
-    type = string
-    default = "us-central1-c"
+    type        = string
+    default     = "us-central1-c"
 }
 
 variable "google_cred_path" {
     description = "Path of the google cloud credentials file"
-    type = string
-    default = "key.json"
+    type        = string
+    default     = "key.json"
 }
 
 variable "lb_address_type" {
     description = "Type of load balancer address"
-    type = string
-    default = "EXTERNAL"
+    type        = string
+    default     = "EXTERNAL"
 }
 
 variable "lb_address_name" {
     description = "Name of load balancer address"
-    type = string
-    default = "load-balacer-address"
+    type        = string
+    default     = "load-balacer-address"
 }
 
 variable "email_tag" {
-  description = "Email tag for resources"
-  type = string
-  default = "tyoma77_ya_ru"
+    description = "Email tag for resources"
+    type        = string
+    default     = "tyoma77_ya_ru"
 }
 
 variable "module_tag" {
-  description = "Module tag for resources"
-  type = string
-  default = "devops"
+    description = "Module tag for resources"
+    type        = string
+    default     = "devops"
 }
 
 variable "ssh_user" {
@@ -74,96 +80,96 @@ variable "machine_type" {
 
 variable "aws_route53_record_prefix" {
     description = "AWS route53 record prefix"
-    default = "artem-vinogradov"
-    type = string
+    default     = "artem-vinogradov"
+    type        = string
 }
 
 variable "aws_route53_record_type" {
     description = "AWS route53 record type"
-    default = "A"
-    type = string
+    default     = "A"
+    type        = string
 }
 
 variable "aws_route53_record_ttl" {
     description = "AWS route53 record ttl"
-    default = 300
-    type = number
+    default     = 300
+    type        = number
 }
 
 variable "aws_route53_zone_name" {
     description = "AWS route53 zone name"
-    default = "devops.rebrain.srwx.net"
-    type = string
+    default     = "devops.rebrain.srwx.net"
+    type        = string
 }
 
 variable "aws_region" {
     description = "AWS region"
-    default = "eu-west-2"
-    type = string
+    default     = "eu-west-2"
+    type        = string
 }
 
 variable "vpc_network_name" {
     description = "Name of the vpc network"
-    default = "vpc-network"
-    type = string
+    default     = "vpc-network"
+    type        = string
 }
 
 variable "image_family" {
     description = "Family of instance image"
-    default = "ubuntu-2104"
-    type = string
+    default     = "ubuntu-2104"
+    type        = string
 }
 
 variable "image_project" {
     description = "Project of instance image"
-    default = "ubuntu-os-cloud"
-    type = string
+    default     = "ubuntu-os-cloud"
+    type        = string
 }
 
 variable "global_rule_name" {
     description = "Name of the global forwarding rule"
-    default = "nginx-global-rule"
-    type = string
+    default     = "nginx-global-rule"
+    type        = string
 }
 
 variable "target_http_proxy_name" {
     description = "Name of the global forwarding rule"
-    default = "nginx-proxy"
-    type = string
+    default     = "nginx-proxy"
+    type        = string
 }
 
 variable "allow_health_check_rule_name" {
     description = "Name of the allow health check firewall rule"
-    default = "allow-health-check"
-    type = string
+    default     = "allow-health-check"
+    type        = string
 }
 
 variable "allow_ssh_name" {
     description = "Name of the allow ssh firewall rule"
-    default = "allow-ssh"
-    type = string
+    default     = "allow-ssh"
+    type        = string
 }
 
 variable "intance_group_name" {
     description = "Name of the intance group"
-    default = "nginx-instance-group"
-    type = string
+    default     = "nginx-instance-group"
+    type        = string
 }
 
 variable "health_check_name" {
     description = "Name of the health check"
-    default = "nginx-health-check"
-    type = string
+    default     = "nginx-health-check"
+    type        = string
 }
 
 variable "backend_service_name" {
     description = "Name of the backend service"
-    default = "nginx-backend-service"
-    type = string
+    default     = "nginx-backend-service"
+    type        = string
 }
 
 variable "url_map_name" {
     description = "Name of the url map"
-    default = "nginx-url-map"
-    type = string
+    default     = "nginx-url-map"
+    type        = string
 }

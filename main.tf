@@ -47,7 +47,7 @@ resource "google_compute_instance_group" "nginx_intance_group" {
   name        = var.intance_group_name
   description = "Instance group for load balancer"
   network     = google_compute_network.vpc_network.id
-  instances   = "${google_compute_instance.staging_vm.*.self_link}"
+  instances   = google_compute_instance.staging_vm.*.self_link
 
   named_port {
     name = "http"
@@ -71,7 +71,7 @@ data "google_compute_image" "ubuntu_image" {
 
 resource "google_compute_instance" "staging_vm" {
   count        = length(var.machines)
-  name         = "${element(var.machines, count.index)}"
+  name         = element(var.machines, count.index)
   machine_type = var.machine_type
   
   boot_disk {
@@ -105,7 +105,7 @@ resource "google_compute_instance" "staging_vm" {
 
 data "google_compute_instance" "nat_addresses" {
   count      = length(var.machines)
-  name       = "${element(var.machines, count.index)}"
+  name       = element(var.machines, count.index)
   depends_on = [google_compute_instance.staging_vm]
 }
 
@@ -161,11 +161,11 @@ resource "aws_route53_record" "www" {
   name    = "${var.aws_route53_record_prefix}.${var.aws_route53_zone_name}"
   type    = var.aws_route53_record_type
   ttl     = var.aws_route53_record_ttl
-  records = ["${google_compute_global_address.loadbalancer_address.address}",]
+  records = [google_compute_global_address.loadbalancer_address.address,]
 }
 
 resource "local_file" "ansible_inventory" {
-  content = "${templatefile("${path.module}/ansible_inventory.tpl", {
+  content = "${templatefile('${path.module}/ansible_inventory.tpl', {
     name = var.machines
     ip_adr = local.google_cloud_ip_address
     }
