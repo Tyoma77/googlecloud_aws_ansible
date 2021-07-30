@@ -165,11 +165,11 @@ resource "aws_route53_record" "www" {
 }
 
 resource "local_file" "ansible_inventory" {
-  content = "${templatefile("${path.module}/ansible_inventory.tpl", {
+  content = templatefile("${path.module}/ansible_inventory.tpl", {
     name = var.machines
     ip_adr = local.google_cloud_ip_address
     }
-  )}"
+  )
   filename = "${path.module}/ansible/inventory"
 }
 
